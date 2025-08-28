@@ -15,17 +15,15 @@ E-ink stock chart display for the Soldered Inkplate 5 v2. Updates once daily wit
 
 3. **Install dependencies**:
    ```bash
-   # Install Arduino CLI with Homebrew
    brew install arduino-cli
+   brew install uv
 
-   # Add board manager URL
-   arduino-cli config add board_manager.additional_urls https://github.com/SolderedElectronics/Dasduino-Board-Definitions-for-Arduino-IDE/raw/master/package_Dasduino_Boards_index.json
-   
-   # Update and install board definitions
+   uv init
+   uv add esptool
+
+   arduino-cli config add board_manager.additional_urls https://github.com/SolderedElectronics/Dasduino-Board-Definitions-for-Arduino-IDE/raw/master/package_Dasduino_Boards_index.json   
    arduino-cli core update-index
    arduino-cli core install Inkplate_Boards:esp32
-   
-   # Install libraries
    arduino-cli lib install InkplateLibrary
    arduino-cli lib install "CSV Parser"
    ```
@@ -34,9 +32,3 @@ E-ink stock chart display for the Soldered Inkplate 5 v2. Updates once daily wit
    ```bash
    ./build.sh
    ```
-
-## Configuration
-
-Edit `config.h` to customize:
-- Stock symbols
-- Update time
