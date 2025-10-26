@@ -24,9 +24,18 @@ fi
 # Auto-detect WiFi SSID if not set (only if building)
 if [ "$UPLOAD_ONLY" = false ] && [ -z "$WIFI_SSID" ]; then
     echo "Auto-detecting current WiFi network..."
-    WIFI_SSID=$(system_profiler SPAirPortDataType | grep -A 1 "Current Network Information:" | grep -v "Current Network Information:" | grep -v "Network Type:" | awk -F: '{print $1}' | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//' | head -n 1)
-    
-    if [ -n "$WIFI_SSID" ]; then
+
+    # Try to get SSID from ipconfig
+    WIFI_SSID=$(ipconfig getsummary en0 | grep ' SSID' | awk '{print $3}')
+
+    # If SSID is redacted, enable verbose mode and try again
+    if [ "$WIFI_SSID" = "<redacted>" ]; then
+        echo "SSID is redacted, enabling verbose mode (requires sudo)..."
+        sudo ipconfig setverbose 1
+        WIFI_SSID=$(ipconfig getsummary en0 | grep ' SSID' | awk '{print $3}')
+    fi
+
+    if [ -n "$WIFI_SSID" ] && [ "$WIFI_SSID" != "<redacted>" ]; then
         echo "Detected WiFi network: $WIFI_SSID"
     else
         echo "Error: Could not detect WiFi network name"
