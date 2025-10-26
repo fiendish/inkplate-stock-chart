@@ -451,14 +451,28 @@ void drawLineChart(float data[], int data_points, float min_val, float max_val,
   
   // Add axis labels inside the chart
   inkplate.setTextSize(TEXT_SIZE);
-  
+
   // Y-axis labels (price range)
-  char maxLabel[10], minLabel[10];
+  char maxLabel[10], minLabel[10], mid66Label[10], mid33Label[10];
   snprintf(maxLabel, sizeof(maxLabel), "%.0f", max_val);
   snprintf(minLabel, sizeof(minLabel), "%.0f", min_val);
+
   // Max price (top-left inside)
   inkplate.setCursor(x + 5, y + 5);
   inkplate.println(maxLabel);
+
+  // 66% label (33% down from top)
+  float val_66 = min_val + (range * 0.66);
+  snprintf(mid66Label, sizeof(mid66Label), "%.0f", val_66);
+  inkplate.setCursor(x + 5, y + (height / 3) - 5);
+  inkplate.println(mid66Label);
+
+  // 33% label (66% down from top)
+  float val_33 = min_val + (range * 0.33);
+  snprintf(mid33Label, sizeof(mid33Label), "%.0f", val_33);
+  inkplate.setCursor(x + 5, y + (2 * height / 3) - 5);
+  inkplate.println(mid33Label);
+
   // Min price (below bottom border, outside chart)
   inkplate.setCursor(x + 5, y + height + 8);
   inkplate.println(minLabel);
