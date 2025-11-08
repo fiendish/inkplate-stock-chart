@@ -2,6 +2,8 @@
 
 E-ink stock chart display for the Soldered Inkplate 5 v2. Updates once daily with 1-month and 1-year price charts.
 
+![Example Photo](Example.jpg)
+
 ## Quick Start
 
 1. **Get Alpha Vantage API key** (free at [alphavantage.co](https://www.alphavantage.co/support/#api-key))
