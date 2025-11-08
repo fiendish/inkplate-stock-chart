@@ -30,9 +30,9 @@ E-ink stock chart display for the Soldered Inkplate 5 v2. Updates once daily wit
    arduino-cli lib install "CSV Parser"
    ```
 
-4. **Build and upload**:
+4. **Build and upload (on macOS, anyway)**:
    ```bash
-   ./build.sh
+   ./macos_build.sh
    ```
 
 ## Configuration

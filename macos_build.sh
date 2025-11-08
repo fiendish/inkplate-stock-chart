@@ -1,7 +1,17 @@
 #!/bin/bash
 
-# Build script for Inkplate Stock Chart
-# This script reads environment variables and passes them as compiler defines
+# macOS build script for Inkplate Stock Chart
+#
+# This script reads environment variables:
+# - ALPHA_VANTAGE_API_KEY: Your Alpha Vantage API key for stock data
+# - WIFI_SSID: (optional) Your WiFi network name
+# - WIFI_PASSWORD: (optional) Your WiFi network password
+#
+# If WIFI_SSID and WIFI_PASSWORD are not set, the script will attempt to
+# auto-detect the current WiFi SSID and retrieve the password from Keychain.
+#
+# Then it uploads the compiled binary to the Inkplate device over USB.
+#
 # Usage: ./build.sh [--upload-only]
 # --upload-only: Skip build and only upload existing build
 
